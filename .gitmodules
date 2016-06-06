@@ -1,5 +1,5 @@
 [submodule "bundle/tern_for_vim"]
-	path = bundle/tern_for_vim
+	path = bundle/tern
 	url = https://github.com/ternjs/tern_for_vim
 [submodule "bundle/fzf"]
 	path = bundle/fzf
