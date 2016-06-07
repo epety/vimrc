@@ -1,4 +1,4 @@
-let &runtimepath.=',~/.vimfiles'
+"let &runtimepath.=',~/.vimfiles'
 call pathogen#infect()
 let mapleader = "\<Space>"
 "set nocompatible
@@ -263,72 +263,7 @@ if has("gui_running")
 
 	" Build all help tags (slower launch, but I run GUI vim like once per day)
 
-	if has("gui_macvim") " OS X
-		"set guifont=Monaco:h14
-		set guifont=Monaco:h10
-		set noantialias
-		"set transparency=15
-
-		" Swipe to move between bufers :D
-		map <silent> <SwipeLeft> :bprev<CR>
-		map <silent> <SwipeRight> :bnext<CR>
-
-		" Cmd+Shift+N = new buffer
-		map <silent> <D-N> :enew<CR>
-
-		" Cmd+P = CtrlP
-		" TODO: This doesn't actually work, still opens Print dialog
-		macmenu File.Print key=<nop>
-		nnoremap <silent> <D-p> :CtrlP<CR>
-
-		" Cmd+t = new tab
-		nnoremap <silent> <D-t> :tabnew<CR>
-
-		" Cmd+w = close tab (this should happen by default)
-		nnoremap <silent> <D-w> :tabclose<CR>
-
-		" Cmd+1...9 = go to that tab
-		map <silent> <D-1> 1gt
-		map <silent> <D-2> 2gt
-		map <silent> <D-3> 3gt
-		map <silent> <D-4> 4gt
-		map <silent> <D-5> 5gt
-		map <silent> <D-6> 6gt
-		map <silent> <D-7> 7gt
-		map <silent> <D-8> 8gt
-		map <silent> <D-9> 9gt
-
-		" OS X probably has ctags in a weird place
-		let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-
-		" Damn you scrollwheel paste
-		nnoremap <MiddleMouse> <Nop>
-		nnoremap <2-MiddleMouse> <Nop>
-		nnoremap <3-MiddleMouse> <Nop>
-		nnoremap <4-MiddleMouse> <Nop>
-
-		inoremap <MiddleMouse> <Nop>
-		inoremap <2-MiddleMouse> <Nop>
-		inoremap <3-MiddleMouse> <Nop>
-		inoremap <4-MiddleMouse> <Nop>
-
-		" Pair Program mode, so that my coworkers can read my screen ;)
-		nnoremap <leader>p :call PairProgramMode()<cr>
-		function! PairProgramMode()
-			if g:pair_program_mode
-				let g:pair_program_mode = 0
-				set guifont=Monaco:h10
-				set noantialias
-				set lines=200 columns=500
-			else
-				set guifont=Monaco:h15
-				set antialias
-				set lines=200 columns=500
-				let g:pair_program_mode = 1
-			endif
-		endfunction
-
-	elseif has("gui_gtk2") " Linux
+	if has("gui_gtk2") " Linux
 		set guifont=monospace\ 18
 		colorscheme PaperColor
 
@@ -352,8 +287,6 @@ if has("gui_running")
 		map <silent> <A-8> 8gt
 		map <silent> <A-9> 9gt
 
-	elseif has("gui_win32") " Windows
-		" WHAT ARE YOU DOING WITH YOUR LIFE?!
 	endif
 else
 	set t_Co=256

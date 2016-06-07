@@ -1,10 +1,10 @@
+"let &runtimepath.=',~/.vimfiles'
 call pathogen#infect()
 let mapleader = "\<Space>"
-set nocompatible
-set nomodeline
+"set nocompatible
+"set nomodeline
 set viminfo='1000,f1,:1000,/1000
 set history=1000
-
 let pair_program_mode = 0
 
 "------  Charset Init  ------
@@ -12,19 +12,19 @@ scriptencoding utf-8
 set encoding=utf-8
 
 "------  Visual Options  ------
-syntax on
-set number
-set nowrap
-set vb
-set ruler
-set statusline=%<%f\ %h%m%r%=%{fugitive#statusline()}\ \ %-14.(%l,%c%V%)\ %P
+"syntax on
+"set number
+"set nowrap
+"set vb
+"set ruler
+"set statusline=%<%f\ %h%m%r%=%{fugitive#statusline()}\ \ %-14.(%l,%c%V%)\ %P
 let g:buftabs_only_basename=1
 let g:buftabs_marker_modified = "+"
 
 " Toggle whitespace visibility with ,s
 nmap <Leader>s :set list!<CR>
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:×
-:set list " Enable by default
+"set list " Enable by default
 
 " <Leader>L = Toggle line numbers
 map <Leader>L :set invnumber<CR>
@@ -35,12 +35,12 @@ set splitright
 
 
 "------  Generic Behavior  ------
-set tabstop=4
-set shiftwidth=4
-set hidden
+"set tabstop=4
+"set shiftwidth=4
+"set hidden
 filetype indent on
 filetype plugin on
-set autoindent
+"set autoindent
 
 "allow deletion of previously entered data in insert mode
 set backspace=indent,eol,start
@@ -49,17 +49,25 @@ set backspace=indent,eol,start
 cmap w!! %!sudo tee > /dev/null %
 
 " F2 = Paste Toggle (in insert mode, pasting indented text behavior changes)
-set pastetoggle=<F2>
+"set pastetoggle=<F2>
 
 " The search for the perfect color scheme...
 map <silent> <Leader>x :RandomColorScheme<CR>
 
 " <Leader>v = Paste
 map <Leader>v "+gP
-
+" copy
+vmap <C-c> "+y
+" cut
+vmap <C-x> "+c
+" paste
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
 " <Leader>c = Copy
 map <Leader>c "+y
-
+"set clipboard+=unnamed  " use the clipboards of vim and win
+"set paste               " Paste from a windows or from vim
+"set go+=a               " Visual selection automatically copied to the clipboard
 " Accidentally pressing Shift K will no longer open stupid man entry
 noremap K <nop>
 
@@ -118,10 +126,10 @@ nnoremap <silent> <Leader><C-q> :Bclose!<CR>
 
 
 "------  Searching  ------
-set incsearch
-set ignorecase
-set smartcase
-set hlsearch
+"set incsearch
+"set ignorecase
+"set smartcase
+"set hlsearch
 
 " Clear search highlights when pressing <Leader>b
 nnoremap <silent> <leader>b :nohlsearch<CR>
@@ -147,7 +155,7 @@ vmap S :s//g<LEFT><LEFT>
 
 
 "------  NERDTree Options  ------
-let NERDTreeIgnore=['CVS','\.dSYM$', '.git','\.*', '.DS_Store', '\.swp$', '\.swo$']
+let NERDTreeIgnore=['CVS','\.dSYM$', '.git', '.DS_Store', '\.swp$', '\.swo$']
 
 "setting root dir in NT also sets VIM's cd
 let NERDTreeChDirMode=2
@@ -172,7 +180,7 @@ autocmd vimenter * if !argc() | NERDTree | endif
 let NERDTreeMinimalUI=1
 
 " Shows invisibles
-let g:NERDTreeShowHidden=1
+"let g:NERDTreeShowHidden=1
 
 
 "------  Fugitive Plugin Options  ------
@@ -254,13 +262,10 @@ if has("gui_running")
 	map <silent> <leader>w :set lines=200 columns=500<CR>
 
 	" Build all help tags (slower launch, but I run GUI vim like once per day)
-	call pathogen#helptags()
-
-	silent! cd $HOME/Projects
-
 
 	if has("gui_gtk2") " Linux
-		set guifont=monospace\ 9
+		set guifont=monospace\ 18
+		colorscheme PaperColor
 
 		" Alt+n = new buffer
 		map <silent> <A-n> :enew<CR>
@@ -288,8 +293,9 @@ else
 	colorscheme Mustang
 	set mouse=a
 endif
-
-
+" Line complete
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
 "------  Local Overrides  ------
 if filereadable($HOME.'/.vimrc_local')
 	source $HOME/.vimrc_local
